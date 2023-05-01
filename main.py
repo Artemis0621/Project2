@@ -37,3 +37,47 @@ To implement this application, the following components will be used:
 Overall, this personal finance manager is a complex Python application that incorporates various elements of software
 development, including validation, exception handling, code organization, data storage, and documentation.
 """
+from account import *
+import os
+
+
+def create_account():
+    user_account = Account()
+    account_choice = ''
+    while account_choice != 'q':
+        print('Welcome to your account!')
+        print('Please choose an option:')
+        account_choice = input('q - quit\nn - new transaction\nr - remove a transaction\ne - export account info to '
+                               'csv file\nv - view all transactions\nb - view current balance')
+        if account_choice == 'n':
+            category = input(f'Enter a category for transaction number:{user_account.get_transaction_number()}\n')
+            date = input('Enter a date for the transaction:\n')
+            amount = float(input('Enter an amount for the transaction:\n'))
+            description = input('Enter a short description for the transaction:\n')
+            user_account.add_transaction(category, date, amount, description)
+        elif account_choice == 'r':
+            transaction_to_remove = input('Choose a transaction number to remove:\n')
+            user_account.remove_transaction(transaction_to_remove)
+        elif account_choice == 'e':
+            pass
+        elif account_choice == 'v':
+            print(user_account.get_transactions())
+        elif account_choice == 'b':
+            print(f'Current balance is: {user_account.get_balance()}')
+
+
+def load_account_from_csv(file_path):
+    pass
+
+
+if __name__ == '__main__':
+    print('Welcome to the personal finance manager!')
+    user_choice = ''
+    while user_choice != 'q':
+        print('Please choose an option:')
+        user_choice = input('q - quit\nn - new account\nr - read account info from csv file\n')
+        if user_choice == 'n':
+            create_account()
+        elif user_choice == 'r':
+            csv_path = input('Please input the path for the csv file.\n')
+            load_account_from_csv(csv_path)
