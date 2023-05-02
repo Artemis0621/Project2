@@ -1,9 +1,6 @@
-from typing import Dict, Any
-
-
 class Account:
     __transaction_number: int
-    __transactions: dict[Any, Any]
+    __transactions: dict
     __balance: float
 
     def __init__(self):
